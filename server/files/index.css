@@ -5,21 +5,51 @@ h1 {
   margin: 8px 0px;
 }
 
+h2 {
+  margin: 0;
+}
+
 /* Constrain the page to the viewport */
 html, body {
   height: 100vh;
 }
 
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas:
+    "h"
+    "n"
+    "m"
+    "f";
+}
+
+header,
+nav,
+main,
+footer {
+  padding: 16px;
+}
+
+header {
+  grid-area: h;
+}
+
 /* Center the nav's header and list */
 nav {
+  grid-area: n;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
 }
 
 /* navigation buttons have full width */
 nav button {
   width: 100%;
+  cursor: pointer;
 }
 
 /* Remove unnecessary space and bullets from the lists */
@@ -30,21 +60,80 @@ ul {
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
+main {
+  grid-area: m;
+  overflow-y: auto;
+}
+
+footer {
+  grid-area: f;
+}
+
+@media (min-width: 900px) {
+  body {
+    grid-template-columns: minmax(220px, 280px) 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "h h"
+      "n m"
+      "f f";
+  }
+}
 
 
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
  */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 
 /* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
    use column direction and center the child items
  */
+nav ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+nav li {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* Task 3.3. Make the main element a Flexbox container */
+main {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  gap: 16px;
+}
 
 
 /* Task 3.4. Make the footer's ul a Flexbox container */
+footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px 24px;
+  margin: 0;
+}
+
+footer li + li::before {
+  content: "-";
+  margin-right: 24px;
+}
 
 
 /* From here on styling from exercise 1 */
@@ -56,8 +145,8 @@ article {
   background-color: lightgray;
   border-radius: 16px;
   padding: 16px;
-  width: 384px;
-  margin: 8px;
+  width: min(100%, 384px);
+  margin: 0;
 }
 
 a {
